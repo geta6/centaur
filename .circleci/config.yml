@@ -1,0 +1,40 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/centaur
+    docker:
+      - image: node:8
+    steps:
+      - checkout
+      - restore_cache:
+          key: centaur-{{ checksum "yarn.lock" }}
+      - run:
+          name: System information
+          command: |
+            echo "Node $(node -v)"
+            echo "Yarn v$(yarn --version)"
+      - run:
+          name: Install dependencies
+          command: yarn
+      - run:
+          name: Lint (ESLint)
+          command: ./node_modules/.bin/eslint . --ext .js,.jsx
+      - run:
+          name: Lint (Stylint)
+          command: ./node_modules/.bin/stylint src
+      - run:
+          name: Test (Jest)
+          command: NODE_ENV=test ./node_modules/.bin/jest --coverage --runInBand
+      - run:
+          name: Coverage
+          command: bash <(curl -s https://codecov.io/bash)
+      - save_cache:
+          key: centaur-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/centaur/node_modules
+            - ~/.cache/yarn/
+      - store_artifacts:
+          path: tmp/coverage
+      - store_test_results:
+          path: tmp/junit

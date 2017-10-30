@@ -124,7 +124,7 @@ export default () => {
           include: path.resolve(__dirname, 'src'),
           loader: 'babel-loader',
           options: {
-            cacheDirectory: DEBUG ? path.resolve(__dirname, 'tmp', 'cache', 'babel-client') : false,
+            cacheDirectory: DEBUG ? path.resolve(__dirname, 'tmp', 'caches', 'babel-client') : false,
             babelrc: false,
             presets: [
               ['env', { targets: { browsers: pkg.browserslist, forceAllTransforms: true }, modules: false, useBuiltIns: false, debug: false }],
@@ -134,8 +134,6 @@ export default () => {
               'transform-decorators-legacy',
               'transform-class-properties',
               'transform-object-rest-spread',
-              ...(DEBUG ? ['transform-react-jsx-source'] : []),
-              ...(DEBUG ? ['transform-react-jsx-self'] : []),
               ...(DEBUG ? [] : ['transform-react-constant-elements']),
               ...(DEBUG ? [] : ['transform-react-inline-elements']),
               ...(DEBUG ? [] : ['transform-react-remove-prop-types']),
@@ -184,7 +182,7 @@ export default () => {
           include: path.resolve(__dirname, 'src'),
           loader: 'babel-loader',
           options: {
-            cacheDirectory: DEBUG ? path.resolve(__dirname, 'tmp', 'cache', 'babel-server') : false,
+            cacheDirectory: DEBUG ? path.resolve(__dirname, 'tmp', 'caches', 'babel-server') : false,
             babelrc: false,
             presets: [
               ['env', { targets: { node: pkg.engines.node.match(/(\d+\.?)+/)[0], forceAllTransforms: true }, modules: false, useBuiltIns: false, debug: false }],

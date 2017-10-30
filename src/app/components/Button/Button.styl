@@ -1,0 +1,37 @@
+@require '../../utils/Stylus/Variables.styl'
+
+.root
+  box-sizing border-box
+  display inline-flex
+  align-items center
+  justify-content flex-start
+  line-height 1.5
+  padding calc(0.375em - 1px) 0.75em
+  vertical-align top
+  height 2.25em
+  border-width 1px
+  border-style solid
+  border-color $color-border
+  background-color $color-white
+  color $color-text
+  text-align center
+  user-select none
+  white-space nowrap
+  font-size 1rem
+  cursor pointer
+  border-radius $radius
+
+  &:hover
+    border-color darken($color-border, 15)
+
+  &:active
+    border-color darken($color-border, 50)
+
+  &.size-small
+    font-size 0.75rem
+
+  &.size-medium
+    font-size 1.25rem
+
+  &.size-large
+    font-size 1.5rem

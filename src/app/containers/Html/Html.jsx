@@ -5,6 +5,8 @@ import { provideContext } from 'fluxible-addons-react';
 @provideContext({ useCss: PropTypes.func.isRequired })
 export default class Html extends PureComponent {
 
+  static displayName = 'HtmlContainer';
+
   static propTypes = {
     style: PropTypes.string.isRequired,
     state: PropTypes.string.isRequired,

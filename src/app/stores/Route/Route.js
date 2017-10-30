@@ -2,7 +2,7 @@ import { fromJS } from 'immutable';
 import { RouteStore } from 'fluxible-router';
 // import AppAction from '../../actions/App';
 // import Payload from '../../utils/Payload';
-import IndexHandler from '../../handlers/Index';
+import StyleGuideHandler from '../../handlers/StyleGuide';
 
 // const createRouteAction = (action) => async (context, ...args) => {
 //   const route = args.shift();
@@ -12,7 +12,7 @@ import IndexHandler from '../../handlers/Index';
 const routes = RouteStore.withStaticRoutes({
   index: {
     path: '/',
-    handler: IndexHandler,
+    handler: StyleGuideHandler,
   },
 });
 

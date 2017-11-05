@@ -63,7 +63,6 @@ gulp.task('copy', async () => {
   }, '', 2));
 
   if (watch || process.argv.includes('--watch')) {
-    const watch = chokidar.watch(['src/public/**'], { ignoreInitial: true });
     const change = async (file) => {
       const src = path.relative('./', file);
       const dst = path.join(__dirname, 'tmp', 'build', path.relative('src', src));
@@ -77,10 +76,7 @@ gulp.task('copy', async () => {
       await $.rmdir(dst);
       $.util.log(`Remove file ${$.util.colors.magenta(src)}`);
     };
-    watch.on('add', change);
-    watch.on('change', change);
-    watch.on('unlink', unlink);
-    watch.on('unlinkDir', unlink);
+    chokidar.watch(['src/public/**'], { ignoreInitial: true }).on('add', change).on('change', change).on('unlink', unlink).on('unlinkDir', unlink);
   }
 });
 
@@ -112,7 +108,7 @@ gulp.task('build', async () => {
  * synchronizing URLs, interactions and code changes across multiple devices.
  */
 gulp.task('start', async () => {
-  if (server) return server;
+  if (server) return;
 
   watch = true;
 
@@ -138,7 +134,10 @@ gulp.task('start', async () => {
     if (!app.hot) throw new Error('Hot Module Replacement is disabled.');
     if (app.hot.status() !== 'idle') return Promise.resolve();
     return app.hot.check(true).then((updatedModules) => {
-      if (!updatedModules) return fromUpdate && $.util.log($.util.colors.green('Update applied.'));
+      if (!updatedModules) {
+        fromUpdate && $.util.log($.util.colors.green('Update applied.'));
+        return;
+      }
       if (updatedModules.length === 0) {
         $.util.log('Nothing hot updated.');
       } else {
@@ -164,7 +163,7 @@ gulp.task('start', async () => {
 
   const config = webpackConfig();
 
-  const clientConfig = config.find((config) => config.name === 'client');
+  const clientConfig = config.find(({ name }) => name === 'client');
   clientConfig.entry.client = ['../lib/WebpackHotClient.js'].concat(clientConfig.entry.client).sort((a, b) => b.includes('polyfill') - a.includes('polyfill'));
   clientConfig.output.filename = clientConfig.output.filename.replace('chunkhash', 'hash');
   clientConfig.output.chunkFilename = clientConfig.output.chunkFilename.replace('chunkhash', 'hash');

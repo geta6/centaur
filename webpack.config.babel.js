@@ -192,8 +192,6 @@ export default () => {
               'transform-decorators-legacy',
               'transform-class-properties',
               'transform-object-rest-spread',
-              ...(DEBUG ? ['transform-react-jsx-source'] : []),
-              ...(DEBUG ? ['transform-react-jsx-self'] : []),
               ...(DEBUG ? [] : ['transform-react-constant-elements']),
               ...(DEBUG ? [] : ['transform-react-inline-elements']),
               ...(DEBUG ? [] : ['transform-react-remove-prop-types']),

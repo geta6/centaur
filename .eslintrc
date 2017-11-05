@@ -19,6 +19,7 @@
     arrow-parens: [2, always]
     eol-last: [2, always]
     comma-dangle: [2, { arrays: always-multiline, objects: always-multiline, imports: always-multiline, exports: always-multiline, functions: ignore }]
+    consistent-return: 2
     global-require: 0
     jsx-quotes: [2, prefer-single]
     linebreak-style: 0
@@ -29,8 +30,10 @@
     no-plusplus: 0
     no-restricted-imports: [error, lodash]
     no-restricted-syntax: [error, ForInStatement, LabeledStatement, WithStatement]
+    no-shadow: 2
     no-unused-expressions: 0
     no-underscore-dangle: 0
+    no-use-before-define: 2
     no-warning-comments: [1, {terms: [todo, fixme], location: anywhere}]
     object-curly-spacing: [2, always]
     padded-blocks: [2, { classes: always }]

@@ -1,4 +1,6 @@
 {
   "PORT": 3000,
-  "HOST": "0.0.0.0"
+  "HOST": "0.0.0.0",
+  "ENDPOINT": "http://localhost:3000",
+  "ENDPOINT_INTERNAL": "http://localhost:3000"
 }

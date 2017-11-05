@@ -47,11 +47,22 @@ srv.use(bodyParser.json());
 // -----------------------------------------------------------------------------
 srv.use(async (req, res, next) => {
   try {
-    Object.assign(req, { context: app.createContext({ optimizePromiseCallback: true }) });
+    Object.assign(req, { context: app.createContext({
+      optimizePromiseCallback: true,
+      fetchPluginConfig: { headers: req.headers },
+    }) });
     await Promise.all([
-      req.context.executeAction(AppAction, new Payload({ type: AppAction.actionTypes.setAgent, entity: { agent: useragent(req.headers['user-agent']) } })),
-      req.context.executeAction(AppAction, new Payload({ type: AppAction.actionTypes.setLocale, entity: { locale: req.acceptsLanguages(['en-us', 'ja-jp']) } })),
-      req.context.executeAction(navigateAction, { url: req.path }),
+      req.context.executeAction(AppAction, new Payload({
+        type: AppAction.actionTypes.setAgent,
+        entity: { agent: useragent(req.headers['user-agent']) },
+      })),
+      req.context.executeAction(AppAction, new Payload({
+        type: AppAction.actionTypes.setLocale,
+        entity: { locale: req.acceptsLanguages(['en-us', 'ja-jp']) },
+      })),
+      req.context.executeAction(navigateAction, {
+        url: req.path,
+      }),
     ]);
     next();
   } catch (e) {

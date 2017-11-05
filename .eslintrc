@@ -36,7 +36,7 @@
     no-use-before-define: 2
     no-warning-comments: [1, {terms: [todo, fixme], location: anywhere}]
     object-curly-spacing: [2, always]
-    padded-blocks: [2, { classes: always }]
+    padded-blocks: [2, { classes: never }]
     require-await: 2
     semi: 2
     yoda: [error, never, { exceptRange: true }]

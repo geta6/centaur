@@ -87,7 +87,7 @@
     "react-intl": "2.4.0",
     "serialize-javascript": "1.4.0",
     "serve-favicon": "2.4.5",
-    "ua-parser-js": "0.7.17"
+    "ua-parser-js": "0.7.33"
   },
   "devDependencies": {
     "assets-webpack-plugin": "3.5.1",
